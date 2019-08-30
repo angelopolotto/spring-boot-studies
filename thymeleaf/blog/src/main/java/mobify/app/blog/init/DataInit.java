@@ -1,5 +1,14 @@
-package mobify.app.blog.init;
-
+//package mobify.app.blog.init;
+//
+//import mobify.app.blog.entity.Post;
+//import mobify.app.blog.repository.PostRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.ApplicationArguments;
+//import org.springframework.boot.ApplicationRunner;
+//import org.springframework.stereotype.Component;
+//
+//import java.util.Date;
+//
 //@Component
 //public class DataInit implements ApplicationRunner {
 //    private final PostRepository postRepository;
