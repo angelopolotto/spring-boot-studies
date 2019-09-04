@@ -1,29 +1,24 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+<!DOCTYPE HTML>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
 <body>
-<div th:fragment="footer">
-
-    <div class="container">
-
-        <footer>
-            <!-- this is footer -->
-            © 2017 mkyong.com
-            <span sec:authorize="isAuthenticated()">
+<th:block th:fragment="footer">
+    <footer class="page-footer font-small blue pt-4">
+        <div class="container-fluid text-center text-md-left">
+            <p>
+                TEST FOOTER
+                <span sec:authorize="isAuthenticated()">
                 | Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
-            </span>
+                </span>
+            </p>
+        </div>
+    </footer>
 
-            <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"
-                    type="text/javascript"></script>
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}" type="text/javascript"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" type="text/javascript"></script>
 
-        </footer>
-    </div>
-
-</div>
+</th:block>
 </body>
 </html>
-C
