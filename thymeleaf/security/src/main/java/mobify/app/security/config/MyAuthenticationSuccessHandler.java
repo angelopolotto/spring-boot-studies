@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-public class MySimpleUrlAuthenticationSuccessHandler
+public class MyAuthenticationSuccessHandler
         implements AuthenticationSuccessHandler {
 
     private Log logger = LogFactory.getLog(this.getClass());
