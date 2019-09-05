@@ -5,32 +5,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class DefaultController {
+public class PublicController {
     @GetMapping("/")
-    public String home1() {
-        return "/home";
-    }
-
-    @GetMapping("/home")
     public String home() {
-        return "/home";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "/admin";
-    }
-
-    @GetMapping("/user")
-    public String user() {
-        return "/user";
+        return "/public/home";
     }
 
     @GetMapping("/about")
     public String about() {
-        return "/about";
+        return "/public/about";
     }
 
     @GetMapping("/login")
@@ -38,11 +24,11 @@ public class DefaultController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getPrincipal() instanceof UserDetails) {
             return "redirect:/";
-        } else return "login";
+        } else return "/public/login";
     }
 
-    @GetMapping("/403")
-    public String error403() {
-        return "/error/403";
+    @PostMapping("/registration")
+    public String registration() {
+        return "/public/registration";
     }
 }

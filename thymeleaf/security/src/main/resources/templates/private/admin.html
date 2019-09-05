@@ -1,14 +1,13 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<!--suppress HtmlRequiredLangAttribute -->
+<html layout:decorate="~{fragments/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="fragments/header :: header-css"/>
+    <title>Index</title>
 </head>
 <body>
-
-<div th:replace="fragments/header :: header"></div>
-
-<div class="container">
-
+<div layout:fragment="content" th:remove="tag">
     <div class="starter-template">
         <h1>Admin page (Spring Security protected)</h1>
 
@@ -18,11 +17,6 @@
         </form>
 
     </div>
-
 </div>
-<!-- /.container -->
-
-<div th:replace="fragments/footer :: footer"></div>
-
 </body>
 </html>

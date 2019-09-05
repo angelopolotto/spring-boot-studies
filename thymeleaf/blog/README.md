@@ -11,3 +11,6 @@
 - https://dzone.com/articles/integration-testing-in-spring-boot-1
 - https://stackoverflow.com/questions/48226651/cant-autowire-webtestclient-no-auto-configuration
 - https://www.baeldung.com/spring-testing-separate-data-source
+
+## Initial data
+- https://www.baeldung.com/spring-boot-data-sql-and-schema-sql

@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(name = "tbl_post")
+@Entity
+@Table(name = "tbl_post")
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -21,19 +22,19 @@ public class Post implements Serializable {
     @NotBlank(message = "Autor é uma informação obrigatória.")
     private String autor;
 
-    @Column(nullable = false, length = 150)
-    @NotBlank(message = "Título é uma informação obrigatória.")
-    private String titulo;
-
-    @Column(nullable = false, length = 2000)
-    @NotBlank(message = "Texto é uma informação obrigatória.")
-    private String texto;
-
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Data é uma informação obrigatória.")
     private Date data;
+
+    @Column(nullable = false, length = 2000)
+    @NotBlank(message = "Texto é uma informação obrigatória.")
+    private String texto;
+
+    @Column(nullable = false, length = 150)
+    @NotBlank(message = "Título é uma informação obrigatória.")
+    private String titulo;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

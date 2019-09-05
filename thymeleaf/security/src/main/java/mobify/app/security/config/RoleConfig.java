@@ -1,6 +1,6 @@
-package mobify.app.security.user;
+package mobify.app.security.config;
 
-public enum Roles {
+public enum RoleConfig {
     ADMIN("ADMIN", "/admin/**"),
     USER("USER", "/user/**");
 
@@ -8,7 +8,7 @@ public enum Roles {
     public String roleAuthority;
     public String authorizedUrl;
 
-    Roles(String role, String authorizedUrl) {
+    RoleConfig(String role, String authorizedUrl) {
         this.role = role;
         this.roleAuthority = "ROLE_" + role;
         this.authorizedUrl = authorizedUrl;

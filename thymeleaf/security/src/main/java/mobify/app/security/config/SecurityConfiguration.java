@@ -1,21 +1,37 @@
 package mobify.app.security.config;
 
-import mobify.app.security.user.Roles;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.sql.DataSource;
+
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-    // roles admin allow to access /admin/**
-    // roles user allow to access /user/**
-    // custom 403 access denied handler
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final DataSource dataSource;
+
+    @Value("${spring.queries.users-query}")
+    private String usersQuery;
+
+    @Value("${spring.queries.roles-query}")
+    private String rolesQuery;
+
+    @Autowired
+    public SecurityConfiguration(BCryptPasswordEncoder bCryptPasswordEncoder, DataSource dataSource) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.dataSource = dataSource;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -30,9 +46,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/libs/**",
                         "/img/**",
                         "/favicon.ico",
+                        "/h2-console/**",
+                        "/console/**",
                         "/webjars/**").permitAll()
-                .antMatchers(Roles.ADMIN.authorizedUrl).hasAnyRole(Roles.ADMIN.role)
-                .antMatchers(Roles.USER.authorizedUrl).hasAnyRole(Roles.USER.role)
+                .antMatchers(RoleConfig.ADMIN.authorizedUrl).hasAnyRole(RoleConfig.ADMIN.role)
+                .antMatchers(RoleConfig.USER.authorizedUrl).hasAnyRole(RoleConfig.USER.role)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -54,14 +72,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // create two users, admin and user
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.jdbcAuthentication()
+//                .usersByUsernameQuery(usersQuery)
+//                .authoritiesByUsernameQuery(rolesQuery)
+//                .dataSource(dataSource)
+//                .passwordEncoder(bCryptPasswordEncoder);
+
+//         memory authentication
         auth.inMemoryAuthentication()
-                .withUser("user").password("123").roles(Roles.USER.role)
+                .withUser("user").password("123").roles(RoleConfig.USER.role)
                 .and()
-                .withUser("admin").password("123").roles(Roles.ADMIN.role)
+                .withUser("admin").password("123").roles(RoleConfig.ADMIN.role)
                 .and()
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
+    // another way to add url exceptions for authentication
 //    @Override
 //    public void configure(WebSecurity web) {
 //        web.ignoring().antMatchers("/webjars/**");

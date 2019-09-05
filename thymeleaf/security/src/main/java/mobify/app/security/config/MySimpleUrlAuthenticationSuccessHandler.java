@@ -1,6 +1,5 @@
 package mobify.app.security.config;
 
-import mobify.app.security.user.Roles;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -54,10 +53,10 @@ public class MySimpleUrlAuthenticationSuccessHandler
         Collection<? extends GrantedAuthority> authorities
                 = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals(Roles.USER.roleAuthority)) {
+            if (grantedAuthority.getAuthority().equals(RoleConfig.USER.roleAuthority)) {
                 isUser = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals(Roles.ADMIN.roleAuthority)) {
+            } else if (grantedAuthority.getAuthority().equals(RoleConfig.ADMIN.roleAuthority)) {
                 isAdmin = true;
                 break;
             }
