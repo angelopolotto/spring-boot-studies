@@ -15,8 +15,17 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "active")
-    private int active;
+    @Column(name = "account_non_expired", nullable = false)
+    private boolean accountNonExpired = false;
+
+    @Column(name = "account_non_locked", nullable = false)
+    private boolean accountNonLocked = false;
+
+    @Column(name = "credentials_non_expired", nullable = false)
+    private boolean credentialsNonExpired = false;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = true;
 
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
@@ -36,7 +45,7 @@ public class User {
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
@@ -46,6 +55,38 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {
@@ -78,14 +119,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
     }
 
     public Set<Role> getRoles() {

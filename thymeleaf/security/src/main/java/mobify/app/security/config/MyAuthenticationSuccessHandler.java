@@ -53,10 +53,10 @@ public class MyAuthenticationSuccessHandler
         Collection<? extends GrantedAuthority> authorities
                 = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals(RoleConfig.USER.roleAuthority)) {
+            if (grantedAuthority.getAuthority().toLowerCase().equals(RoleConfig.USER.roleAuthority.toLowerCase())) {
                 isUser = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals(RoleConfig.ADMIN.roleAuthority)) {
+            } else if (grantedAuthority.getAuthority().toLowerCase().equals(RoleConfig.ADMIN.roleAuthority.toLowerCase())) {
                 isAdmin = true;
                 break;
             }
