@@ -1,4 +1,4 @@
-package mobify.app.security.config;
+package mobify.app.security.config.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

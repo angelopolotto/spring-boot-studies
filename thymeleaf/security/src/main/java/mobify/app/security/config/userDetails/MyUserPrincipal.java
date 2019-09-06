@@ -1,4 +1,4 @@
-package mobify.app.security.config;
+package mobify.app.security.config.userDetails;
 
 import mobify.app.security.entity.Role;
 import mobify.app.security.entity.User;

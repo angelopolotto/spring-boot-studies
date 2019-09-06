@@ -1,5 +1,6 @@
-package mobify.app.security.config;
+package mobify.app.security.config.handler;
 
+import mobify.app.security.config.RoleConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
