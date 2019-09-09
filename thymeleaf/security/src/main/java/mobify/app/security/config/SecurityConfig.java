@@ -2,11 +2,14 @@ package mobify.app.security.config;
 
 import mobify.app.security.config.handler.MyAccessDeniedHandler;
 import mobify.app.security.config.handler.MyAuthenticationSuccessHandler;
+import mobify.app.security.config.userDetails.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -14,6 +17,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final MyUserDetailsService myUserDetailsService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public SecurityConfig(MyUserDetailsService myUserDetailsService, PasswordEncoder passwordEncoder) {
+        this.myUserDetailsService = myUserDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -63,30 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new MyAccessDeniedHandler();
     }
 
-    // create two users, admin and user
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-////        JDBC
-//        auth.jdbcAuthentication()
-//                .usersByUsernameQuery(usersQuery)
-//                .authoritiesByUsernameQuery(rolesQuery)
-//                .dataSource(dataSource);
-////                .passwordEncoder(bCryptPasswordEncoder);
-
-//         memory authentication
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("123").roles(RoleConfig.USER.role)
-//                .and()
-//                .withUser("admin").password("123").roles(RoleConfig.ADMIN.role)
-//                .and()
-//                .passwordEncoder(NoOpPasswordEncoder.getInstance());
-//    }
-
-    // another way to add url exceptions for authentication
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers("/webjars/**");
-//        web.ignoring().antMatchers("/css/**", "/fonts/**", "/libs/**");
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder);
+    }
 }

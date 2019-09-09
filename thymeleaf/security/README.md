@@ -46,3 +46,12 @@
 ## Loading Hibernate
 
 - https://www.devmedia.com.br/lazy-e-eager-loading-com-hibernate/29554
+
+## Profiles
+
+- https://www.baeldung.com/spring-profiles
+
+## Test
+
+ - https://www.baeldung.com/spring-testing-separate-data-source
+ - https://www.baeldung.com/spring-boot-testing

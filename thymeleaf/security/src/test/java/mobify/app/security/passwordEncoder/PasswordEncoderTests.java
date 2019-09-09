@@ -10,7 +10,7 @@ public class PasswordEncoderTests {
     @Test
     public void hashPassword() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String rawPassword = "123";
+        String rawPassword = "12345";
 
         for (int i = 0; i < 5; i++) {
             // "123456" - plain text - user input from user interface

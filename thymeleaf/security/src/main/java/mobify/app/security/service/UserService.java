@@ -1,5 +1,6 @@
 package mobify.app.security.service;
 
+import mobify.app.security.config.RoleConfig;
 import mobify.app.security.entity.Role;
 import mobify.app.security.entity.User;
 import mobify.app.security.repository.RoleRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("userService")
 public class UserService {
@@ -32,9 +34,12 @@ public class UserService {
 
     public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(true);
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByRole(RoleConfig.ADMIN.role);
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         return userRepository.save(user);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

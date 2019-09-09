@@ -5,7 +5,6 @@ import mobify.app.security.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,9 +17,11 @@ import javax.validation.Valid;
 @Controller
 public class PublicController {
     private final UserService userService;
+    private PasswordEncoder passwordEncoder;
 
-    public PublicController(UserService userService) {
+    public PublicController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -63,10 +64,6 @@ public class PublicController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("/public/registration");
         } else {
-            PasswordEncoder encoder = new BCryptPasswordEncoder();
-            String encodedPass = encoder.encode(user.getPassword());
-
-            user.setPassword(encodedPass);
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
