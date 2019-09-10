@@ -1,0 +1,88 @@
+spring:
+  # ==============================================================
+  # = H2
+  # ==============================================================
+  # To See H2 Console in Browser:
+  # http://localhost:9090/h2-console
+  # Enabling H2 Console
+  h2:
+    console:
+      enabled: "true"
+
+  # ==============================================================
+  # = Data Source
+  # ==============================================================
+  datasource:
+    #    url: jdbc:h2:mem:test
+    #    driverClassName: org.h2.Driver
+    #    username: sa
+    #    password: ""
+
+    # ==============================================================
+    # = Initialize the database using data.sql script
+    # ==============================================================
+    initialization-mode: always
+
+    # ==============================================================
+    # = Keep the connection alive if idle for a long time (needed in production)
+    # ==============================================================
+    tomcat.test-while-idle: "true"
+    tomcat.validation-query: SELECT 1
+
+  # ==============================================================
+  # = JPA/Hibernate
+  # ==============================================================
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: "true"
+
+    properties:
+      hibernate:
+        format_sql: "true"
+        dialect: org.hibernate.dialect.H2Dialect
+
+
+
+  # ==============================================================
+  # = Thymeleaf
+  # ==============================================================
+  thymeleaf:
+    #    check-template: "true"
+    #    check-template-location: "true"
+    #    servlet.content-type: text/html
+    cache: "false"
+#    enabled: "true"
+#    encoding: UTF-8
+#    mode=HTML
+#    prefix=classpath:/templates/
+#    suffix=.html
+
+# ==============================================================
+# = Server
+# ==============================================================
+logging:
+  level.org.springframework.security: DEBUG
+
+# ==============================================================
+# = Server
+# ==============================================================
+# configure the whitelabel error
+server:
+  error:
+    whitelabel:
+      enabled: "false"
+  # change the server default port
+  port: "9090"
+
+## ==============================================================
+## = Spring Security / Queries for AuthenticationManagerBuilder
+## ==============================================================
+#spring.queries.users-query=select email, password, active from user where email=?
+#spring.queries.roles-query=select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+#@Value("${spring.queries.users-query}")
+#private String usersQuery;
+#
+#@Value("${spring.queries.roles-query}")
+#private String rolesQuery;

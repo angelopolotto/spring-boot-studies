@@ -55,3 +55,12 @@
 
  - https://www.baeldung.com/spring-testing-separate-data-source
  - https://www.baeldung.com/spring-boot-testing
+ 
+## Clean Architecture
+
+- https://github.com/damienbeaufils/clean-architecture-demo
+- https://medium.com/slalom-engineering/clean-architecture-with-java-11-f78bba431041
+
+## Entity to DTO(data transfer object)
+
+- https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
