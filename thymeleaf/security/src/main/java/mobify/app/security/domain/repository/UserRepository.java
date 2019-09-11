@@ -1,4 +1,4 @@
-package mobify.app.security.domain.interfaces;
+package mobify.app.security.domain.repository;
 
 import mobify.app.security.domain.entity.User;
 

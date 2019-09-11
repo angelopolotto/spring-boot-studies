@@ -1,7 +1,7 @@
 package mobify.app.security.infrastructure.jparepository;
 
 import mobify.app.security.domain.entity.Role;
-import mobify.app.security.domain.interfaces.RoleRepository;
+import mobify.app.security.domain.repository.RoleRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
