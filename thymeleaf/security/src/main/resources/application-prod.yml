@@ -74,7 +74,7 @@ server:
     whitelabel:
       enabled: "false"
   # change the server default port
-  port: "9090"
+  port: 9090
 
 ## ==============================================================
 ## = Spring Security / Queries for AuthenticationManagerBuilder

@@ -3,7 +3,7 @@ package mobify.app.security.infrastructure.config;
 import mobify.app.security.domain.entity.RoleConfig;
 import mobify.app.security.infrastructure.config.handler.MyAccessDeniedHandler;
 import mobify.app.security.infrastructure.config.handler.MyAuthenticationSuccessHandler;
-import mobify.app.security.infrastructure.config.userDetails.MyUserDetailsService;
+import mobify.app.security.infrastructure.config.userdetails.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
