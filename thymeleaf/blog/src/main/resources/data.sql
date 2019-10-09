@@ -1,0 +1,1 @@
+insert into tbl_post values (1, 'autor 1', '20019-05-09', 'texto de teste', 'titulo 1');

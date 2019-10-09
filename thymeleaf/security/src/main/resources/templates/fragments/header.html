@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<!--suppress HtmlRequiredLangAttribute -->
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="header">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">
+                    <!--suppress CheckImageSize -->
+                    <img alt="some logo to show" height="30" src="../../static/img/fragments/logo.png"
+                         th:src="@{/img/fragments/logo.png}" width="30"/>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a th:href="@{/}">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</th:block>
+</body>
+</html>
